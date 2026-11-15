@@ -1,118 +1,78 @@
-# LogViewer [![Packagist License][badge_license]](LICENSE.md) [![For Laravel][badge_laravel]][link-github-repo]
+# LogViewer per Laravel 13
 
-[![Github Workflow Status][badge_build]][link-github-status]
-[![Coverage Status][badge_coverage]][link-scrutinizer]
-[![Scrutinizer Code Quality][badge_quality]][link-scrutinizer]
-[![SensioLabs Insight][badge_insight]][link-insight]
-[![Github Issues][badge_issues]][link-github-issues]
+Fork di [ARCANEDEV/LogViewer](https://github.com/ARCANEDEV/LogViewer), basato sulla release `11.0.1` (`806498da9792eb34e39df9350a7379a9018eaf5d`). Nome Composer: `andicot/log-viewer`.
 
-[![Packagist][badge_package]][link-packagist]
-[![Packagist Release][badge_release]][link-packagist]
-[![Packagist Downloads][badge_downloads]][link-packagist]
+Richiede PHP 8.3+ e Laravel 13. Mantiene l'interfaccia originale, i temi Bootstrap 3/4/5, i contatori cliccabili per livello nell'elenco, ricerca, stack trace, contesto, download e cancellazione.
 
-*By [ARCANEDEV&copy;](http://www.arcanedev.net/)*
+È stato corretto anche il pulsante del menu mobile Bootstrap 5, senza variazioni grafiche.
 
-This package allows you to manage and keep track of each one of your log files.
+La dipendenza `arcanedev/support` è stata eliminata: provider, binding, rotte e comandi utilizzano le API native Laravel. Namespace `Arcanedev\LogViewer`, helper, configurazione, nomi delle rotte e tag di pubblicazione sono conservati. Il pacchetto originale non può essere installato contemporaneamente, perché espone le stesse classi e funzioni.
 
- > **NOTE: You can also use LogViewer as an API.**
+## Installazione
 
-Official documentation for LogViewer can be found at the [_docs folder](_docs/1.Installation-and-Setup.md).
+Il repository pubblico è [Andicot/log-viewer](https://github.com/Andicot/log-viewer).
 
-Feel free to check out the [releases](https://github.com/ARCANEDEV/LogViewer/releases), [license](LICENSE.md), and [contribution guidelines](CONTRIBUTING.md).
+Fino alla registrazione su Packagist, nell'app Laravel configurare il repository GitHub:
 
-## Features
+```sh
+composer config repositories.andicot-log-viewer vcs https://github.com/Andicot/log-viewer
+composer require andicot/log-viewer:^13.0
+```
 
-  - A great Log viewer API.
-  - Laravel `5.x` to `11.x` are supported.
-  - Ready to use (Views, Routes, controllers &hellip; Out of the box) [Note: No need to publish assets]
-  - View, paginate, filter, download and delete logs.
-  - Load a custom logs storage path.
-  - Localized log levels.
-  - Logs menu/tree generator.
-  - Grouped logs by dates and levels.
-  - Customized log levels icons (font awesome by default).
-  - Works great with big logs !!
-  - Well documented package (IDE Friendly).
-  - Well tested (100% code coverage with maximum code quality).
+Se presente, rimuovere prima `arcanedev/log-viewer` dai requisiti dell'app. Per eseguire la sostituzione in un unico aggiornamento delle dipendenze:
 
-## Table of contents
+```sh
+composer remove arcanedev/log-viewer --no-update
+composer require andicot/log-viewer:^13.0 -W
+```
 
-  1. [Installation and Setup](_docs/1.Installation-and-Setup.md)
-  2. [Configuration](_docs/2.Configuration.md)
-  3. [Usage](_docs/3.Usage.md)
+Pubblicare la configurazione solo se non è già presente:
 
-### Supported localizations
+```sh
+php artisan log-viewer:publish --tag=config
+```
 
- > Dear artisans, i'm counting on you to help me out to add more translations ( ^_^)b
+Dopo la registrazione su Packagist sarà sufficiente `composer require andicot/log-viewer:^13.0`, senza il repository aggiuntivo.
 
-| Local   | Language              |
-|---------|-----------------------|
-| `ar`    | Arabic                |
-| `bg`    | Bulgarian             |
-| `bn`    | Bengali               |
-| `de`    | German                |
-| `en`    | English               |
-| `es`    | Spanish               |
-| `et`    | Estonian              |
-| `fa`    | Farsi                 |
-| `fr`    | French                |
-| `he`    | Hebrew                |
-| `hu`    | Hungarian             |
-| `hy`    | Armenian              |
-| `id`    | Indonesian            |
-| `it`    | Italian               |
-| `ja`    | Japanese              |
-| `ko`    | Korean                |
-| `ms`    | Malay                 |
-| `nl`    | Dutch                 |
-| `pl`    | Polish                |
-| `pt-BR` | Brazilian Portuguese  |
-| `ro`    | Romanian              |
-| `ru`    | Russian               |
-| `si`    | Sinhalese             |
-| `sv`    | Swedish               |
-| `th`    | Thai                  |
-| `tr`    | Turkish               |
-| `uk`    | Ukrainian             |
-| `uz`    | Uzbek                 |
-| `zh`    | Chinese (Simplified)  |
-| `zh-TW` | Chinese (Traditional) |
+I provider vengono scoperti automaticamente. Configurazioni e viste già pubblicate continuano a funzionare; non utilizzare `--force` se si vogliono mantenere le proprie personalizzazioni.
 
-## Contribution
+## Configurazione dell'app
 
-Any ideas are welcome. Feel free to submit any issues or pull requests, please check the [contribution guidelines](CONTRIBUTING.md).
+```dotenv
+LOG_CHANNEL=stack
+LOG_STACK=daily
+LOG_DAILY_DAYS=14
+ARCANEDEV_LOGVIEWER_MIDDLEWARE=web,auth
+```
 
-## Security
+Il visualizzatore legge i file giornalieri locali. L'app deve applicare anche il proprio middleware di autorizzazione amministrativa. Come nel pacchetto originale, senza configurazione non viene aggiunta automaticamente una protezione alle rotte.
 
-If you discover any security related issues, please email arcanedev.maroc@gmail.com instead of using the issue tracker.
+Per il tema predefinito Bootstrap 5, nel `boot()` dell'`AppServiceProvider` dell'app configurare la paginazione, come richiesto anche dal pacchetto originale:
 
-## Credits
+```php
+\Illuminate\Pagination\Paginator::useBootstrapFive();
+```
 
-- [ARCANEDEV][link-author]
-- [All Contributors][link-contributors]
+Questa impostazione vale per l'app intera: in app con altre interfacce di paginazione personalizzare le viste pubblicate del visualizzatore invece di cambiare il default globale.
 
-## PREVIEW
+Aprire `/log-viewer`. Dall'elenco `/log-viewer/logs`, ogni contatore diverso da zero apre direttamente il livello corrispondente.
 
-![Dashboard](https://raw.githubusercontent.com/ARCANEDEV/LogViewer/master/_screenshots/1-dashboard.jpg)
-![Logs list](https://raw.githubusercontent.com/ARCANEDEV/LogViewer/master/_screenshots/2-logs-list.jpg)
-![Single log](https://raw.githubusercontent.com/ARCANEDEV/LogViewer/master/_screenshots/3-single-log.jpg)
+## Test e verifica
 
-[badge_laravel]:      https://img.shields.io/badge/Laravel-5.x%20to%2011.x-orange.svg?style=flat-square
-[badge_license]:      https://img.shields.io/packagist/l/arcanedev/log-viewer.svg?style=flat-square
-[badge_build]:        https://img.shields.io/github/workflow/status/ARCANEDEV/LogViewer/run-tests?style=flat-square
-[badge_coverage]:     https://img.shields.io/scrutinizer/coverage/g/ARCANEDEV/LogViewer.svg?style=flat-square
-[badge_quality]:      https://img.shields.io/scrutinizer/g/ARCANEDEV/LogViewer.svg?style=flat-square
-[badge_insight]:      https://img.shields.io/sensiolabs/i/d6b4587a-e00d-4dac-98db-f979731fdc4d.svg?style=flat-square
-[badge_issues]:       https://img.shields.io/github/issues/ARCANEDEV/LogViewer.svg?style=flat-square
-[badge_package]:      https://img.shields.io/badge/package-arcanedev/log--viewer-blue.svg?style=flat-square
-[badge_release]:      https://img.shields.io/packagist/v/arcanedev/log-viewer.svg?style=flat-square
-[badge_downloads]:    https://img.shields.io/packagist/dt/arcanedev/log-viewer.svg?style=flat-square
+```sh
+composer install
+composer test
+```
 
-[link-author]:        https://github.com/arcanedev-maroc
-[link-github-status]: https://github.com/ARCANEDEV/LogViewer/actions
-[link-github-repo]:   https://github.com/ARCANEDEV/LogViewer
-[link-github-issues]: https://github.com/ARCANEDEV/LogViewer/issues
-[link-contributors]:  https://github.com/ARCANEDEV/LogViewer/graphs/contributors
-[link-packagist]:     https://packagist.org/packages/arcanedev/log-viewer
-[link-scrutinizer]:   https://scrutinizer-ci.com/g/ARCANEDEV/LogViewer/?branch=master
-[link-insight]:       https://insight.sensiolabs.com/projects/d6b4587a-e00d-4dac-98db-f979731fdc4d
+La CI configura PHP 8.3/8.4/8.5 e dipendenze minime/correnti. I test usano Testbench 11 e PHPUnit 12; le annotazioni della suite originale sono state convertite in attributi.
+
+- [Installazione dettagliata e app di verifica](_docs/1.Installation-and-Setup.md)
+- [Configurazione originale](_docs/2.Configuration.md)
+- [API e utilizzo originale](_docs/3.Usage.md)
+- [Risultati e limiti della verifica Laravel 13](docs/verifiche/2026-11-15-laravel13.md)
+
+Il parser originale carica i file in memoria: questa versione non introduce la lettura in streaming. Il comando `log-viewer:check` riconosce il driver `daily` sia direttamente sia all’interno di stack, anche annidati e con nomi personalizzati. Gli stack senza canali giornalieri continuano a segnalare requisiti non soddisfatti.
+
+## Licenza e attribuzione
+
+Codice originale di ARCANEDEV e relativi contributori. Licenza [MIT](LICENSE.md), copyright e attribuzioni originali conservati. Questo fork non è una release ufficiale ARCANEDEV.

@@ -47,13 +47,13 @@ class LogStylerTest extends TestCase
      | -----------------------------------------------------------------
      */
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_can_ben_instantiated(): void
     {
         static::assertInstanceOf(LogStyler::class, $this->styler);
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_can_get_icon(): void
     {
         foreach (self::$logLevels as $level) {
@@ -64,7 +64,7 @@ class LogStylerTest extends TestCase
         }
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_can_get_default_when_icon_not_found(): void
     {
         $icon = $this->styler->icon('danger', $default = 'fa fa-fw fa-danger');
@@ -73,7 +73,7 @@ class LogStylerTest extends TestCase
         static::assertSame('<i class="'.$default.'"></i>', $icon->toHtml());
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_can_get_color(): void
     {
         foreach (self::$logLevels as $level) {
@@ -81,7 +81,7 @@ class LogStylerTest extends TestCase
         }
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_can_get_default_when_color_not_found(): void
     {
         $color = $this->styler->color('danger', $default = '#BADA55');
@@ -90,7 +90,7 @@ class LogStylerTest extends TestCase
         static::assertSame($default, $color);
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_can_use_helper_to_get_icon(): void
     {
         foreach (self::$logLevels as $level) {
@@ -101,7 +101,7 @@ class LogStylerTest extends TestCase
         }
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_can_use_helper_get_color(): void
     {
         foreach (self::$logLevels as $level) {
@@ -109,7 +109,7 @@ class LogStylerTest extends TestCase
         }
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_can_get_string_to_highlight(): void
     {
         $expected = [

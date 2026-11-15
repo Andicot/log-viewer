@@ -46,7 +46,7 @@ class LogEntryCollectionTest extends TestCase
      | -----------------------------------------------------------------
      */
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_can_be_instantiated(): void
     {
         static::assertInstanceOf(LogEntryCollection::class, $this->entries);
@@ -54,7 +54,7 @@ class LogEntryCollectionTest extends TestCase
         static::assertSame(0, $this->entries->count());
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_can_load_raw_entries(): void
     {
         foreach ($this->getDates() as $date) {
@@ -66,7 +66,7 @@ class LogEntryCollectionTest extends TestCase
         }
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_can_get_entries_by_level(): void
     {
         foreach ($this->getDates() as $date) {
@@ -80,7 +80,7 @@ class LogEntryCollectionTest extends TestCase
         }
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_can_get_stats(): void
     {
         foreach ($this->getDates() as $date) {
@@ -94,7 +94,7 @@ class LogEntryCollectionTest extends TestCase
         }
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_can_get_tree(): void
     {
         foreach ($this->getDates() as $date) {

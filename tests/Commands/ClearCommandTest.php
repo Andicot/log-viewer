@@ -53,7 +53,7 @@ class ClearCommandTest extends TestCase
     | -----------------------------------------------------------------
     */
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_can_delete_all_log_files(): void
     {
         static::createDummyLog(date('Y-m-d'), storage_path('logs-to-clear'));

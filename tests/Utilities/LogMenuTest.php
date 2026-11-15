@@ -46,13 +46,13 @@ class LogMenuTest extends TestCase
      | -----------------------------------------------------------------
      */
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_can_be_instantiated(): void
     {
         static::assertInstanceOf(LogMenu::class, $this->menu);
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_can_make_menu_with_helper(): void
     {
         $log = $this->getLog('2015-01-01');

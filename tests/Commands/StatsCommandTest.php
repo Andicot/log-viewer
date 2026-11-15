@@ -18,7 +18,7 @@ class StatsCommandTest extends TestCase
      | -----------------------------------------------------------------
      */
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_can_display_stats(): void
     {
         $this->artisan('log-viewer:stats')

@@ -14,13 +14,6 @@
             <directory>./src</directory>
         </include>
     </source>
-    <coverage>
-        <report>
-            <clover outputFile="build/coverage/clover.xml"/>
-            <html outputDirectory="build/coverage/html"/>
-            <text outputFile="build/coverage/coverage.txt" showOnlySummary="true"/>
-        </report>
-    </coverage>
     <php>
         <env name="LOG_CHANNEL" value="daily"/>
     </php>

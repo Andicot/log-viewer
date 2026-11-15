@@ -122,7 +122,7 @@ class LogChecker implements LogCheckerContract
      */
     protected function setHandler($handler)
     {
-        $this->handler = strtolower($handler);
+        $this->handler = $handler;
 
         return $this;
     }
@@ -192,25 +192,30 @@ class LogChecker implements LogCheckerContract
      */
 
     /**
-     * Is a daily handler mode ?
-     *
-     * @return bool
+     * Check the configured driver, including channels within a stack.
      */
     protected function isDaily()
     {
-        return $this->isSameHandler(self::HANDLER_DAILY);
+        return $this->channelUsesDaily($this->handler);
     }
 
-    /**
-     * Is the handler is the same as the application log handler.
-     *
-     * @param  string  $handler
-     *
-     * @return bool
-     */
-    private function isSameHandler($handler)
+    private function channelUsesDaily($name, array $visited = []): bool
     {
-        return $this->handler === $handler;
+        if (! is_string($name) || in_array($name, $visited, true)) return false;
+
+        $channel = $this->config->get("logging.channels.$name", []);
+        if (($channel['driver'] ?? null) === self::HANDLER_DAILY) return true;
+        if (($channel['driver'] ?? null) !== 'stack') return false;
+
+        $visited[] = $name;
+        $channels = $channel['channels'] ?? [];
+        if (is_string($channels)) $channels = explode(',', $channels);
+
+        foreach ($channels as $child) {
+            if ($this->channelUsesDaily($child, $visited)) return true;
+        }
+
+        return false;
     }
 
     /* -----------------------------------------------------------------
@@ -246,7 +251,7 @@ class LogChecker implements LogCheckerContract
     {
         if ($this->isDaily()) return;
 
-        $this->messages['handler'] = 'You should set the log handler to `daily` mode. Please check the LogViewer wiki page (Requirements) for more details.';
+        $this->messages['handler'] = 'Configure a channel with the `daily` driver, either directly or within the default `stack` channel.';
     }
 
     /**

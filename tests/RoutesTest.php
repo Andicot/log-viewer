@@ -16,7 +16,7 @@ class RoutesTest extends TestCase
      | -----------------------------------------------------------------
      */
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_can_see_dashboard_page(): void
     {
         $response = $this->get(route('log-viewer::dashboard'));
@@ -28,7 +28,7 @@ class RoutesTest extends TestCase
         );
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_can_see_logs_page(): void
     {
         $response = $this->get(route('log-viewer::logs.list'));
@@ -41,7 +41,7 @@ class RoutesTest extends TestCase
         // TODO: Add more assertion => list all logs
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_can_show_a_log_page(): void
     {
         $date = '2015-01-01';
@@ -56,7 +56,7 @@ class RoutesTest extends TestCase
         // TODO: Add more assertion => list all log entries
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_can_see_a_filtered_log_entries_page(): void
     {
         $date     = '2015-01-01';
@@ -72,7 +72,7 @@ class RoutesTest extends TestCase
         // TODO: Add more assertion => log entries is filtered by a level
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_can_search_if_log_entries_contains_same_header_page(): void
     {
         $date     = '2015-01-01';
@@ -93,7 +93,7 @@ class RoutesTest extends TestCase
         static::assertCount(1, $entries);
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_can_search_using_shuffled_query(): void
     {
         $date     = '2015-01-01';
@@ -116,7 +116,7 @@ class RoutesTest extends TestCase
         static::assertCount(1, $entries);
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_can_search_using_case_insensitive_query(): void
     {
         $date     = '2015-01-01';
@@ -139,7 +139,7 @@ class RoutesTest extends TestCase
         static::assertCount(1, $entries);
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_can_still_search_if_extra_spacing_is_in_query(): void
     {
         $date     = '2015-01-01';
@@ -162,7 +162,7 @@ class RoutesTest extends TestCase
         static::assertCount(1, $entries);
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_must_redirect_if_search_query_is_not_available(): void
     {
         $date  = '2015-01-01';
@@ -172,7 +172,7 @@ class RoutesTest extends TestCase
              ->assertRedirect(route('log-viewer::logs.show', [$date]));
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_must_redirect_on_all_level(): void
     {
         $date     = '2015-01-01';
@@ -185,7 +185,7 @@ class RoutesTest extends TestCase
         // TODO: Add more assertion to check the redirect url
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_can_download_a_log_page(): void
     {
         $date = '2015-01-01';
@@ -202,7 +202,7 @@ class RoutesTest extends TestCase
         static::assertEquals("laravel-$date.log", $base->getFile()->getFilename());
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_can_delete_a_log(): void
     {
         static::createDummyLog(
@@ -221,7 +221,7 @@ class RoutesTest extends TestCase
         ;
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_must_throw_log_not_found_exception_on_show(): void
     {
         $response = $this->get(route('log-viewer::logs.show', ['0000-00-00']));
@@ -235,7 +235,7 @@ class RoutesTest extends TestCase
         static::assertSame('Log not found in this date [0000-00-00]', $response->exception->getMessage());
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_must_throw_log_not_found_exception_on_delete(): void
     {
         $response = $this->delete(route('log-viewer::logs.delete'), ['date' => '0000-00-00'], ['HTTP_X-Requested-With' => 'XMLHttpRequest']);
@@ -244,7 +244,7 @@ class RoutesTest extends TestCase
         static::assertStringStartsWith('The log(s) could not be located at : ', $response->exception->getMessage());
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_must_throw_method_not_allowed_on_delete(): void
     {
         $response = $this->delete(route('log-viewer::logs.delete'));

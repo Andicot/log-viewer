@@ -13,7 +13,7 @@ use Arcanedev\LogViewer\Contracts\Utilities\LogMenu as LogMenuContract;
 use Arcanedev\LogViewer\Contracts\Utilities\LogStyler as LogStylerContract;
 use Arcanedev\LogViewer\LogViewer;
 use Arcanedev\LogViewer\Utilities;
-use Arcanedev\Support\Providers\ServiceProvider;
+use Illuminate\Support\ServiceProvider;
 use Illuminate\Contracts\Support\DeferrableProvider;
 
 /**
@@ -70,7 +70,7 @@ class DeferredServicesProvider extends ServiceProvider implements DeferrableProv
      */
     private function registerLogViewer(): void
     {
-        $this->singleton(LogViewerContract::class, LogViewer::class);
+        $this->app->singleton(LogViewerContract::class, LogViewer::class);
     }
 
     /**
@@ -78,7 +78,7 @@ class DeferredServicesProvider extends ServiceProvider implements DeferrableProv
      */
     private function registerLogLevels(): void
     {
-        $this->singleton(LogLevelsContract::class, function ($app) {
+        $this->app->singleton(LogLevelsContract::class, function ($app) {
             return new Utilities\LogLevels(
                 $app['translator'],
                 $app['config']->get('log-viewer.locale')
@@ -91,7 +91,7 @@ class DeferredServicesProvider extends ServiceProvider implements DeferrableProv
      */
     private function registerStyler(): void
     {
-        $this->singleton(LogStylerContract::class, Utilities\LogStyler::class);
+        $this->app->singleton(LogStylerContract::class, Utilities\LogStyler::class);
     }
 
     /**
@@ -99,7 +99,7 @@ class DeferredServicesProvider extends ServiceProvider implements DeferrableProv
      */
     private function registerLogMenu(): void
     {
-        $this->singleton(LogMenuContract::class, Utilities\LogMenu::class);
+        $this->app->singleton(LogMenuContract::class, Utilities\LogMenu::class);
     }
 
     /**
@@ -107,7 +107,7 @@ class DeferredServicesProvider extends ServiceProvider implements DeferrableProv
      */
     private function registerFilesystem(): void
     {
-        $this->singleton(FilesystemContract::class, function ($app) {
+        $this->app->singleton(FilesystemContract::class, function ($app) {
             /** @var  \Illuminate\Config\Repository  $config */
             $config     = $app['config'];
             $filesystem = new Utilities\Filesystem($app['files'], $config->get('log-viewer.storage-path'));
@@ -125,7 +125,7 @@ class DeferredServicesProvider extends ServiceProvider implements DeferrableProv
      */
     private function registerFactory(): void
     {
-        $this->singleton(FactoryContract::class, Utilities\Factory::class);
+        $this->app->singleton(FactoryContract::class, Utilities\Factory::class);
     }
 
     /**
@@ -133,6 +133,6 @@ class DeferredServicesProvider extends ServiceProvider implements DeferrableProv
      */
     private function registerChecker(): void
     {
-        $this->singleton(LogCheckerContract::class, Utilities\LogChecker::class);
+        $this->app->singleton(LogCheckerContract::class, Utilities\LogChecker::class);
     }
 }

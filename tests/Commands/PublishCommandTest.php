@@ -22,6 +22,7 @@ class PublishCommandTest extends TestCase
     {
         $this->deleteConfig();
         $this->deleteLocalizations();
+        $this->illuminateFile()->deleteDirectory(config('view.paths')[0].'/vendor/log-viewer');
 
         parent::tearDown();
     }
@@ -31,7 +32,7 @@ class PublishCommandTest extends TestCase
      | -----------------------------------------------------------------
      */
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_can_publish_all(): void
     {
         $this->artisan('log-viewer:publish')
@@ -39,10 +40,10 @@ class PublishCommandTest extends TestCase
 
         static::assertHasConfigFile();
         static::assertHasLocalizationFiles();
-        // TODO: Add views assertions
+        self::assertDirectoryExists(config('view.paths')[0].'/vendor/log-viewer');
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_can_publish_all_with_force(): void
     {
         $this->artisan('log-viewer:publish', ['--force'   => true])
@@ -50,10 +51,10 @@ class PublishCommandTest extends TestCase
 
         static::assertHasConfigFile();
         static::assertHasLocalizationFiles();
-        // TODO: Add views assertions
+        self::assertDirectoryExists(config('view.paths')[0].'/vendor/log-viewer');
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_can_publish_only_config(): void
     {
         $this->artisan('log-viewer:publish', ['--tag' => 'config'])
@@ -61,16 +62,11 @@ class PublishCommandTest extends TestCase
 
         static::assertHasConfigFile();
         static::assertHasNotLocalizationFiles();
-        // TODO: Add views assertions
+        self::assertDirectoryDoesNotExist(config('view.paths')[0].'/vendor/log-viewer');
     }
 
-    /**
-     * @test
-     *
-     * @dataProvider  providePublishableTranslationsTags
-     *
-     * @param  string  $tag
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
+    #[\PHPUnit\Framework\Attributes\DataProvider('providePublishableTranslationsTags')]
     public function it_can_publish_only_translations(string $tag): void
     {
         $this->artisan('log-viewer:publish', ['--tag' => $tag])
@@ -78,7 +74,7 @@ class PublishCommandTest extends TestCase
 
         static::assertHasNotConfigFile();
         static::assertHasLocalizationFiles();
-        // TODO: Add views assertions
+        self::assertDirectoryDoesNotExist(config('view.paths')[0].'/vendor/log-viewer');
     }
 
     public static function providePublishableTranslationsTags(): array

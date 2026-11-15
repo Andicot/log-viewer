@@ -18,10 +18,19 @@ class CheckCommandTest extends TestCase
      | -----------------------------------------------------------------
      */
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_can_check(): void
     {
         $this->artisan('log-viewer:check')
              ->assertExitCode(0);
     }
+    #[\PHPUnit\Framework\Attributes\Test]
+    public function it_reports_success_with_stack_daily(): void
+    {
+        config(['logging.default' => 'stack', 'logging.channels.stack' => ['driver' => 'stack', 'channels' => ['daily']]]);
+        $this->artisan('log-viewer:check')
+            ->expectsTable(['Status', 'Message'], [['success', 'Are you ready to rock ?']])
+            ->assertSuccessful();
+    }
+
 }

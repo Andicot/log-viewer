@@ -53,13 +53,13 @@ class StatsTableTest extends TestCase
      | -----------------------------------------------------------------
      */
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_can_be_instantiated(): void
     {
         static::assertInstanceOf(StatsTable::class, $this->table);
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_can_make_instance(): void
     {
         $this->table = StatsTable::make(
@@ -70,25 +70,25 @@ class StatsTableTest extends TestCase
         static::assertTable($this->table);
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_can_get_header(): void
     {
         static::assertTableHeader($this->table);
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_can_get_rows(): void
     {
         static::assertTableRows($this->table);
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_can_get_footer(): void
     {
         static::assertTableFooter($this->table);
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_can_get_raw_data(): void
     {
         static::assertEquals(
@@ -97,7 +97,7 @@ class StatsTableTest extends TestCase
         );
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_can_get_totals(): void
     {
         $totals = $this->table->totals();
@@ -105,7 +105,7 @@ class StatsTableTest extends TestCase
         static::assertInstanceOf(\Illuminate\Support\Collection::class, $totals);
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_can_get_json_data_for_chart(): void
     {
         $json = $this->table->totalsJson();
@@ -113,7 +113,7 @@ class StatsTableTest extends TestCase
         static::assertJson($json);
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_can_get_stats_table_via_log_viewer(): void
     {
         /** @var  \Arcanedev\LogViewer\Contracts\LogViewer  $logViewer */
@@ -122,7 +122,7 @@ class StatsTableTest extends TestCase
         static::assertTable($logViewer->statsTable());
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_can_get_stats_table_via_log_factory(): void
     {
         /** @var  \Arcanedev\LogViewer\Contracts\Utilities\Factory  $logFactory */

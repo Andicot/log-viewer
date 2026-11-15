@@ -4,65 +4,63 @@ declare(strict_types=1);
 
 namespace Arcanedev\LogViewer;
 
-use Arcanedev\Support\Providers\PackageServiceProvider;
+use Illuminate\Support\ServiceProvider;
 
 /**
- * Class     LogViewerServiceProvider
+ * Register the original LogViewer resources using Laravel's native APIs.
  *
- * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
+ * @author ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class LogViewerServiceProvider extends PackageServiceProvider
+class LogViewerServiceProvider extends ServiceProvider
 {
-    /* -----------------------------------------------------------------
-     |  Properties
-     | -----------------------------------------------------------------
-     */
-
-    /**
-     * Package name.
-     *
-     * @var string
-     */
-    protected $package = 'log-viewer';
-
-    /* -----------------------------------------------------------------
-     |  Main Methods
-     | -----------------------------------------------------------------
-     */
-
-    /**
-     * Register the service provider.
-     */
     public function register(): void
     {
-        parent::register();
-
-        $this->registerConfig();
+        $this->mergeConfigFrom($this->getBasePath().'/config/log-viewer.php', 'log-viewer');
 
         $this->booted(function () {
-            $this->registerProvider(Providers\RouteServiceProvider::class);
+            $this->app->register(Providers\RouteServiceProvider::class);
         });
 
-        $this->registerCommands([
-            Commands\PublishCommand::class,
-            Commands\StatsCommand::class,
-            Commands\CheckCommand::class,
-            Commands\ClearCommand::class,
-        ]);
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                Commands\PublishCommand::class,
+                Commands\StatsCommand::class,
+                Commands\CheckCommand::class,
+                Commands\ClearCommand::class,
+            ]);
+        }
     }
 
-    /**
-     * Boot the service provider.
-     */
     public function boot(): void
     {
-        $this->loadTranslations();
-        $this->loadViews();
+        $base = $this->getBasePath();
+        $translations = $this->app->langPath('vendor/log-viewer');
+
+        $this->loadViewsFrom($base.'/views', 'log-viewer');
+        $this->loadTranslationsFrom($base.'/translations', 'log-viewer');
+        $this->loadJsonTranslationsFrom(file_exists($translations) ? $translations : $base.'/translations');
 
         if ($this->app->runningInConsole()) {
-            $this->publishConfig();
-            $this->publishTranslations();
-            $this->publishViews();
+            $this->publishResources();
+        }
+    }
+
+    public function getBasePath(): string
+    {
+        return dirname(__DIR__);
+    }
+
+    protected function publishResources(): void
+    {
+        $base = $this->getBasePath();
+        $resources = [
+            'config' => [$base.'/config/log-viewer.php' => config_path('log-viewer.php')],
+            'translations' => [$base.'/translations' => $this->app->langPath('vendor/log-viewer')],
+            'views' => [$base.'/views' => $this->app['config']['view.paths'][0].'/vendor/log-viewer'],
+        ];
+
+        foreach ($resources as $tag => $paths) {
+            $this->publishes($paths, ['arcanedev', 'log-viewer', $tag, 'log-viewer-'.$tag]);
         }
     }
 }

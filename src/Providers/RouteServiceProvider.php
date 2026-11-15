@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Arcanedev\LogViewer\Providers;
 
 use Arcanedev\LogViewer\Http\Routes\LogViewerRoute;
-use Arcanedev\Support\Providers\RouteServiceProvider as ServiceProvider;
+use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
 /**
  * Class     RouteServiceProvider
@@ -41,7 +41,7 @@ class RouteServiceProvider extends ServiceProvider
     {
         if ($this->isEnabled()) {
             $this->routes(function () {
-                static::mapRouteClasses([LogViewerRoute::class]);
+                $this->app->make(LogViewerRoute::class)->map();
             });
         }
     }

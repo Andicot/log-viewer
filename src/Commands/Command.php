@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace Arcanedev\LogViewer\Commands;
 
 use Arcanedev\LogViewer\Contracts\LogViewer as LogViewerContract;
-use Arcanedev\Support\Console\Command as BaseCommand;
+use Illuminate\Console\Command as BaseCommand;
+use Symfony\Component\Console\Helper\TableSeparator;
 
 /**
  * Class     Command
@@ -43,6 +44,19 @@ abstract class Command extends BaseCommand
      |  Other Methods
      | -----------------------------------------------------------------
      */
+
+    protected function tableSeparator(): TableSeparator
+    {
+        return new TableSeparator;
+    }
+
+    protected function frame(string $text): void
+    {
+        $line = '+'.str_repeat('-', strlen($text) + 4).'+';
+        $this->info($line);
+        $this->info("|  $text  |");
+        $this->info($line);
+    }
 
     /**
      * Display LogViewer Logo and Copyrights.

@@ -46,25 +46,25 @@ class LogLevelsTest extends TestCase
      | -----------------------------------------------------------------
      */
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_can_be_instantiated(): void
     {
         static::assertInstanceOf(LogLevels::class, $this->levels);
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_can_get_all_levels(): void
     {
         static::assertLevels($this->levels->lists());
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_can_get_all_levels_by_static_method(): void
     {
         static::assertLevels(LogLevels::all());
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_can_get_all_translated_levels(): void
     {
         foreach (self::$locales as $locale) {
@@ -76,7 +76,7 @@ class LogLevelsTest extends TestCase
         }
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_must_choose_the_log_viewer_locale_instead_of_app_locale(): void
     {
         static::assertNotEquals('auto', $this->levels->getLocale());
@@ -88,7 +88,7 @@ class LogLevelsTest extends TestCase
         static::assertNotEquals($this->app->getLocale(), $this->levels->getLocale());
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_can_translate_levels_automatically(): void
     {
         foreach (self::$locales as $locale) {

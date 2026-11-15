@@ -46,13 +46,13 @@ class FactoryTest extends TestCase
      | -----------------------------------------------------------------
      */
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_can_be_instantiated(): void
     {
         static::assertInstanceOf(Factory::class, $this->logFactory);
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_can_get_filesystem_object(): void
     {
         $expectations = [
@@ -65,7 +65,7 @@ class FactoryTest extends TestCase
         }
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_can_get_levels_object(): void
     {
         $expectations = [
@@ -78,7 +78,7 @@ class FactoryTest extends TestCase
         }
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_can_get_log_entries(): void
     {
         $logEntries = $this->logFactory->entries($date = '2015-01-01');
@@ -88,7 +88,7 @@ class FactoryTest extends TestCase
         }
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_can_get_dates(): void
     {
         $dates = $this->logFactory->dates();
@@ -97,7 +97,7 @@ class FactoryTest extends TestCase
         static::assertDates($dates);
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_can_get_all_logs(): void
     {
         $logs = $this->logFactory->all();
@@ -107,7 +107,7 @@ class FactoryTest extends TestCase
         static::assertSame(2, $logs->count());
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_can_paginate_all_logs(): void
     {
         $logs = $this->logFactory->paginate();
@@ -119,13 +119,13 @@ class FactoryTest extends TestCase
         static::assertSame(1,  $logs->currentPage());
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_can_get_count(): void
     {
         static::assertSame(2, $this->logFactory->count());
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_can_can_set_custom_path(): void
     {
         $this->logFactory->setPath(static::fixturePath('custom-path-logs'));
@@ -139,13 +139,13 @@ class FactoryTest extends TestCase
         }
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_can_get_total(): void
     {
         static::assertSame(16, $this->logFactory->total());
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_can_get_total_by_level(): void
     {
         foreach (self::$logLevels as $level) {
@@ -153,7 +153,7 @@ class FactoryTest extends TestCase
         }
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_can_get_tree(): void
     {
         $tree = $this->logFactory->tree();
@@ -165,7 +165,7 @@ class FactoryTest extends TestCase
         }
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_can_get_translated_tree(): void
     {
         $this->app->setLocale('fr');
@@ -198,7 +198,7 @@ class FactoryTest extends TestCase
         static::assertSame($expected, $tree = $this->logFactory->tree(true));
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_can_get_menu(): void
     {
         $menu = $this->logFactory->menu();
@@ -210,7 +210,7 @@ class FactoryTest extends TestCase
         }
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_can_get_untranslated_menu(): void
     {
         $menu = $this->logFactory->menu(false);
@@ -222,13 +222,13 @@ class FactoryTest extends TestCase
         }
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_can_check_is_not_empty(): void
     {
         static::assertFalse($this->logFactory->isEmpty());
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_must_throw_a_filesystem_exception(): void
     {
         $this->expectException(\Arcanedev\LogViewer\Exceptions\LogNotFoundException::class);
@@ -236,7 +236,7 @@ class FactoryTest extends TestCase
         $this->logFactory->get('2222-11-11'); // Future FTW
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_can_set_and_get_pattern(): void
     {
         $prefix    = 'laravel-';

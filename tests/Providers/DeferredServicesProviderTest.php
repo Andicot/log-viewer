@@ -47,14 +47,13 @@ class DeferredServicesProviderTest extends TestCase
      | -----------------------------------------------------------------
      */
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
 
     public function it_can_be_instantiated(): void
     {
         $expectations = [
             \Illuminate\Support\ServiceProvider::class,
             \Illuminate\Contracts\Support\DeferrableProvider::class,
-            \Arcanedev\Support\Providers\ServiceProvider::class,
             DeferredServicesProvider::class,
         ];
 
@@ -63,7 +62,7 @@ class DeferredServicesProviderTest extends TestCase
         }
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_can_provides(): void
     {
         $expected = [

@@ -46,7 +46,7 @@ class LogEntryTest extends TestCase
      | -----------------------------------------------------------------
      */
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_can_be_instantiated(): void
     {
         static::assertInstanceOf(LogEntry::class, $this->entry);
@@ -54,13 +54,13 @@ class LogEntryTest extends TestCase
         static::assertFalse($this->entry->hasContext());
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_can_convert_to_json(): void
     {
         static::assertJsonObject($this->entry);
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_can_check_if_same_level(): void
     {
         $level = $this->entry->level;
@@ -68,13 +68,13 @@ class LogEntryTest extends TestCase
         static::assertTrue($this->entry->isSameLevel($level));
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_can_get_stack(): void
     {
         static::assertNotSame($this->entry->stack, $this->entry->stack());
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_can_extract_context(): void
     {
         $entry = new LogEntry(
