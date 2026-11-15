@@ -28,6 +28,8 @@ class LogViewerRoute
 
         Route::group($attributes, function() {
             Route::name('log-viewer::')->group(function () {
+                Route::get('assets/{path}', [\Arcanedev\LogViewer\Http\Controllers\AssetController::class, 'mostra'])
+                    ->where('path', '.*')->name('assets');
                 Route::get('/', [LogViewerController::class, 'index'])
                      ->name('dashboard'); // log-viewer::dashboard
 

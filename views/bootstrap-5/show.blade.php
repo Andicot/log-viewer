@@ -44,9 +44,11 @@
                         <a href="{{ route('log-viewer::logs.download', [$log->date]) }}" class="btn btn-sm btn-success">
                             <i class="fa fa-download"></i> @lang('Download')
                         </a>
+                        @unless ($readOnly)
                         <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#delete-log-modal">
                             <i class="fa fa-trash-o"></i> @lang('Delete')
                         </button>
+                        @endunless
                     </div>
                 </div>
                 <div class="table-responsive">
@@ -139,6 +141,7 @@
                                         {{ $entry->header }}
                                     </td>
                                     <td class="text-end">
+                                        @include('log-viewer::partials.copy', ['buttonClass' => 'btn btn-sm btn-light'])
                                         @if ($entry->hasStack())
                                         <a class="btn btn-sm btn-light" role="button" data-bs-toggle="collapse"
                                            href="#log-stack-{{ $key }}" aria-expanded="false" aria-controls="log-stack-{{ $key }}">
@@ -189,6 +192,7 @@
 @endsection
 
 @section('modals')
+    @unless ($readOnly)
     {{-- DELETE MODAL --}}
     <div class="modal fade" id="delete-log-modal" tabindex="-1" aria-labelledby="delete-log-modal-label" aria-hidden="true">
         <div class="modal-dialog">
@@ -212,11 +216,14 @@
             </form>
         </div>
     </div>
+    @endunless
 @endsection
 
 @section('scripts')
+    <script src="{{ route('log-viewer::assets', ['path' => 'copy.js', 'v' => \Arcanedev\LogViewer\LogViewer::VERSION]) }}" defer></script>
     <script>
         ready(() => {
+            @unless ($readOnly)
             let deleteLogModal = new bootstrap.Modal('div#delete-log-modal')
             let deleteLogForm = document.querySelector('form#delete-log-form')
             let submitBtn = new bootstrap.Button(deleteLogForm.querySelector('button[type=submit]'))
@@ -253,6 +260,8 @@
 
                 return false
             })
+
+            @endunless
 
             @unless (empty(log_styler()->toHighlight()))
                 @php

@@ -9,5 +9,9 @@
     "Warning": "Avviso",
     "Notice": "Notifica",
     "Info": "Info",
-    "Debug": "Debug"
+    "Debug": "Debug",
+    "Copy details": "Copia dettagli",
+    "Copied": "Copiato",
+    "Copy failed. Select and copy the text below.": "Copia non riuscita. Seleziona e copia il testo qui sotto.",
+    "Log details": "Dettagli del log"
 }

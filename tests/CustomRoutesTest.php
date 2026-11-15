@@ -24,6 +24,7 @@ class CustomRoutesTest extends TestCase
     {
         $endpoints = [
             ['GET', 'dashboard', []],
+            ['GET', 'assets', ['path' => 'copy.js']],
             ['GET', 'logs.list', []],
             ['GET', 'logs.show', ['2015-01-01']],
             ['GET', 'logs.filter', ['2015-01-01', 'error']],

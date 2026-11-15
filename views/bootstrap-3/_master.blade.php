@@ -7,9 +7,9 @@
     <title>LogViewer - Created by ARCANEDEV</title>
     <meta name="description" content="LogViewer">
     <meta name="author" content="ARCANEDEV">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-    <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700|Source+Sans+Pro:400,600' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="{{ route('log-viewer::assets', ['path' => 'vendor/9365a5383fa9cec3a6e1.css', 'v' => \Arcanedev\LogViewer\LogViewer::VERSION]) }}">
+    <link rel="stylesheet" href="{{ route('log-viewer::assets', ['path' => 'vendor/33dcfefafef539f6f089.css', 'v' => \Arcanedev\LogViewer\LogViewer::VERSION]) }}">
+    <link href='{{ route('log-viewer::assets', ['path' => 'vendor/8a53b38ce39b7d9f6684.css', 'v' => \Arcanedev\LogViewer\LogViewer::VERSION]) }}' rel='stylesheet' type='text/css'>
     <style>
         html {
             position: relative;
@@ -274,8 +274,8 @@
         }
     </style>
     <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <script src="{{ route('log-viewer::assets', ['path' => 'vendor/67f965a823db689d52be.js', 'v' => \Arcanedev\LogViewer\LogViewer::VERSION]) }}"></script>
+    <script src="{{ route('log-viewer::assets', ['path' => 'vendor/752f3ad621af7dcda60b.js', 'v' => \Arcanedev\LogViewer\LogViewer::VERSION]) }}"></script>
     <![endif]-->
 </head>
 <body>
@@ -328,9 +328,9 @@
     </footer>
 
     {{-- Scripts --}}
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.3.0/Chart.min.js"></script>
+    <script src="{{ route('log-viewer::assets', ['path' => 'vendor/2cc278e73bd3d55d1563.js', 'v' => \Arcanedev\LogViewer\LogViewer::VERSION]) }}"></script>
+    <script src="{{ route('log-viewer::assets', ['path' => 'vendor/5c219be5e74fb85ebac8.js', 'v' => \Arcanedev\LogViewer\LogViewer::VERSION]) }}"></script>
+    <script src="{{ route('log-viewer::assets', ['path' => 'vendor/4db2c8260de12484f5ec.js', 'v' => \Arcanedev\LogViewer\LogViewer::VERSION]) }}"></script>
     <script>
         Chart.defaults.global.responsive      = true;
         Chart.defaults.global.scaleFontFamily = "'Source Sans Pro'";

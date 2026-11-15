@@ -48,9 +48,11 @@
                             <a href="{{ route('log-viewer::logs.download', [$date]) }}" class="btn btn-sm btn-success">
                                 <i class="fa fa-fw fa-download"></i>
                             </a>
-                            <a href="#delete-log-modal" class="btn btn-sm btn-danger" data-log-date="{{ $date }}">
+                            @unless ($readOnly)
+                                <a href="#delete-log-modal" class="btn btn-sm btn-danger" data-log-date="{{ $date }}">
                                 <i class="fa fa-fw fa-trash-o"></i>
                             </a>
+                            @endunless
                         </td>
                     </tr>
                 @empty
@@ -68,6 +70,7 @@
 @endsection
 
 @section('modals')
+    @unless ($readOnly)
     {{-- DELETE MODAL --}}
     <div class="modal fade" id="delete-log-modal" tabindex="-1" aria-labelledby="delete-log-modal-label" aria-hidden="true">
         <div class="modal-dialog">
@@ -91,9 +94,11 @@
             </form>
         </div>
     </div>
+    @endunless
 @endsection
 
 @section('scripts')
+    @unless ($readOnly)
     <script>
         ready(() => {
             let deleteLogModal = new bootstrap.Modal('div#delete-log-modal')
@@ -154,4 +159,5 @@
             })
         })
     </script>
+    @endunless
 @endsection

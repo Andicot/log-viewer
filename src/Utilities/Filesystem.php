@@ -255,6 +255,7 @@ class Filesystem implements FilesystemContract
      */
     public function delete(string $date)
     {
+        throw_if(config('log-viewer.read-only', false), FilesystemException::class, 'Log viewer is read-only.');
         $path = $this->getLogPath($date);
 
         throw_unless($this->filesystem->delete($path), FilesystemException::cannotDeleteLog());
@@ -269,6 +270,7 @@ class Filesystem implements FilesystemContract
      */
     public function clear()
     {
+        throw_if(config('log-viewer.read-only', false), FilesystemException::class, 'Log viewer is read-only.');
         return $this->filesystem->delete($this->logs());
     }
 

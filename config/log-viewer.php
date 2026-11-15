@@ -4,6 +4,16 @@ use Arcanedev\LogViewer\Contracts\Utilities\Filesystem;
 
 return [
 
+    // Prevent deletion through the UI, PHP API and clear command. Downloads remain available.
+    'read-only' => env('LOG_VIEWER_READ_ONLY', false),
+
+    // Only counters and a content fingerprint are stored, never log messages.
+    'stats-cache' => [
+        'enabled' => true,
+        'store' => 'file',
+        'ttl' => 86400,
+    ],
+
     /* -----------------------------------------------------------------
      |  Log files storage path
      | -----------------------------------------------------------------

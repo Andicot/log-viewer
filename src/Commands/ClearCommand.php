@@ -40,6 +40,11 @@ class ClearCommand extends Command
      */
     public function handle(): int
     {
+        if (config('log-viewer.read-only', false)) {
+            $this->error('Log viewer is read-only.');
+            return static::FAILURE;
+        }
+
         if ($this->confirm('This will delete all the log files, Do you wish to continue?')) {
             $this->logViewer->clear();
             $this->info('Successfully cleared the logs!');

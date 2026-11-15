@@ -161,6 +161,14 @@ class LogEntry implements Arrayable, Jsonable, JsonSerializable
         return $this->icon()->toHtml().' '.$this->name();
     }
 
+    /** Plain text for the clipboard; never copy rendered stack markup. */
+    public function dettagliDaCopiare(): string
+    {
+        return '['.$this->datetime->format('Y-m-d H:i:s').'] '.$this->env.'.'.strtoupper($this->level)
+            .': '.$this->header.($this->stack ? "\n".$this->stack : '')
+            .($this->hasContext() ? "\n".$this->context() : '');
+    }
+
     /**
      * Get translated level name.
      *

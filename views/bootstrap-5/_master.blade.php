@@ -7,9 +7,9 @@
     <meta name="author" content="ARCANEDEV">
     <title>LogViewer - Created by ARCANEDEV</title>
     {{-- Styles --}}
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-    <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700|Source+Sans+Pro:400,600' rel='stylesheet' type='text/css'>
+    <link href="{{ route('log-viewer::assets', ['path' => 'vendor/f7456a80eeff00f2a172.css', 'v' => \Arcanedev\LogViewer\LogViewer::VERSION]) }}" rel="stylesheet" integrity="sha384-Iu/oNQf4LLEs7z+PgpYxOb6jsAh1YkmkwbjS6cgAN5cNDNOYuanlSvvT9mKlfrXC" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ route('log-viewer::assets', ['path' => 'vendor/33dcfefafef539f6f089.css', 'v' => \Arcanedev\LogViewer\LogViewer::VERSION]) }}">
+    <link href='{{ route('log-viewer::assets', ['path' => 'vendor/8a53b38ce39b7d9f6684.css', 'v' => \Arcanedev\LogViewer\LogViewer::VERSION]) }}' rel='stylesheet' type='text/css'>
     <style>
         html {
             position: relative;
@@ -259,8 +259,8 @@
     </footer>
 
     {{-- Scripts --}}
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js" integrity="sha512-SIMGYRUjwY8+gKg7nn9EItdD8LCADSDfJNutF9TPrvEo86sQmFMh6MyralfIyhADlajSxqc7G0gs7+MwWF/ogQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="{{ route('log-viewer::assets', ['path' => 'vendor/a3af9791e709f46df95d.js', 'v' => \Arcanedev\LogViewer\LogViewer::VERSION]) }}" integrity="sha384-DF7RWWtbkft7SxY4zlK0r4mOeye+iISeAFa7MX0VTDaBKyc5TSPt+O767yLkxOpX" crossorigin="anonymous"></script>
+    <script src="{{ route('log-viewer::assets', ['path' => 'vendor/db1f0ce5e1f4ea57f155.js', 'v' => \Arcanedev\LogViewer\LogViewer::VERSION]) }}" integrity="sha384-DhxhYObIMeMNGyAG7iK11OHzBIKyEIeRL0ad1iFPAOwZB8iirUlTT0O/WJJUk8+o" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
         function ready(fn) {
             if (document.readyState !== 'loading'){

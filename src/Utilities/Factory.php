@@ -238,7 +238,13 @@ class Factory implements FactoryContract
      */
     public function stats()
     {
-        return $this->logs()->stats();
+        $stats = [];
+        $cache = app(StatsCache::class);
+        foreach ($this->filesystem->dates(true) as $date => $path) {
+            $stats[$date] = $cache->conteggi($path, fn () => $this->log($date)->stats());
+        }
+
+        return $stats;
     }
 
     /**

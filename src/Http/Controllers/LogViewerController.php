@@ -189,6 +189,7 @@ class LogViewerController extends Controller
      */
     public function delete(Request $request)
     {
+        abort_if(config('log-viewer.read-only', false), 403, 'Log viewer is read-only.');
         abort_unless($request->ajax(), 405, 'Method Not Allowed');
 
         $date = $request->input('date');
@@ -215,6 +216,8 @@ class LogViewerController extends Controller
     protected function view($view, $data = [], $mergeData = [])
     {
         $theme = config('log-viewer.theme');
+
+        $data['readOnly'] = (bool) config('log-viewer.read-only', false);
 
         return view()->make("log-viewer::{$theme}.{$view}", $data, $mergeData);
     }

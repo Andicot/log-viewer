@@ -7,9 +7,9 @@
     <meta name="author" content="ARCANEDEV">
     <title>LogViewer - Created by ARCANEDEV</title>
     {{-- Styles --}}
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-    <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700|Source+Sans+Pro:400,600' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="{{ route('log-viewer::assets', ['path' => 'vendor/c5958d6e7a05fb31be0f.css', 'v' => \Arcanedev\LogViewer\LogViewer::VERSION]) }}" integrity="sha384-AMmVlXCTkfP1vvwIar442tQHHkMa5UntaKLo4h0yDS+VTMjwyPce/u3QXoiyPkHa" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ route('log-viewer::assets', ['path' => 'vendor/33dcfefafef539f6f089.css', 'v' => \Arcanedev\LogViewer\LogViewer::VERSION]) }}">
+    <link href='{{ route('log-viewer::assets', ['path' => 'vendor/8a53b38ce39b7d9f6684.css', 'v' => \Arcanedev\LogViewer\LogViewer::VERSION]) }}' rel='stylesheet' type='text/css'>
     <style>
         html {
             position: relative;
@@ -259,10 +259,10 @@
     </footer>
 
     {{-- Scripts --}}
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+    <script src="{{ route('log-viewer::assets', ['path' => 'vendor/b6aa672e90b144727060.js', 'v' => \Arcanedev\LogViewer\LogViewer::VERSION]) }}" crossorigin="anonymous"></script>
+    <script src="{{ route('log-viewer::assets', ['path' => 'vendor/41bf2295ae0513657783.js', 'v' => \Arcanedev\LogViewer\LogViewer::VERSION]) }}" crossorigin="anonymous"></script>
+    <script src="{{ route('log-viewer::assets', ['path' => 'vendor/ce00da7c2ff05fca8c92.js', 'v' => \Arcanedev\LogViewer\LogViewer::VERSION]) }}" crossorigin="anonymous"></script>
+    <script src="{{ route('log-viewer::assets', ['path' => 'vendor/481a5530158682b37d35.js', 'v' => \Arcanedev\LogViewer\LogViewer::VERSION]) }}"></script>
 
     @yield('modals')
     @yield('scripts')

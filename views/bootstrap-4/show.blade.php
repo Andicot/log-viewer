@@ -44,9 +44,11 @@
                         <a href="{{ route('log-viewer::logs.download', [$log->date]) }}" class="btn btn-sm btn-success">
                             <i class="fa fa-download"></i> @lang('Download')
                         </a>
+                        @unless ($readOnly)
                         <a href="#delete-log-modal" class="btn btn-sm btn-danger" data-toggle="modal">
                             <i class="fa fa-trash-o"></i> @lang('Delete')
                         </a>
+                        @endunless
                     </div>
                 </div>
                 <div class="table-responsive">
@@ -140,6 +142,7 @@
                                         {{ $entry->header }}
                                     </td>
                                     <td class="text-right">
+                                        @include('log-viewer::partials.copy', ['buttonClass' => 'btn btn-sm btn-light'])
                                         @if ($entry->hasStack())
                                         <a class="btn btn-sm btn-light" role="button" data-toggle="collapse"
                                            href="#log-stack-{{ $key }}" aria-expanded="false" aria-controls="log-stack-{{ $key }}">
@@ -190,6 +193,7 @@
 @endsection
 
 @section('modals')
+    @unless ($readOnly)
     {{-- DELETE MODAL --}}
     <div id="delete-log-modal" class="modal fade" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
@@ -215,11 +219,14 @@
             </form>
         </div>
     </div>
+    @endunless
 @endsection
 
 @section('scripts')
+    <script src="{{ route('log-viewer::assets', ['path' => 'copy.js', 'v' => \Arcanedev\LogViewer\LogViewer::VERSION]) }}" defer></script>
     <script>
         $(function () {
+            @unless ($readOnly)
             var deleteLogModal = $('div#delete-log-modal'),
                 deleteLogForm  = $('form#delete-log-form'),
                 submitBtn      = deleteLogForm.find('button[type=submit]');
@@ -252,6 +259,8 @@
 
                 return false;
             });
+
+            @endunless
 
             @unless (empty(log_styler()->toHighlight()))
                 @php
