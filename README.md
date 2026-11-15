@@ -12,10 +12,9 @@ La dipendenza `arcanedev/support` è stata eliminata: provider, binding, rotte e
 
 Il repository pubblico è [Andicot/log-viewer](https://github.com/Andicot/log-viewer).
 
-Fino alla registrazione su Packagist, nell'app Laravel configurare il repository GitHub:
+Il pacchetto è disponibile su [Packagist](https://packagist.org/packages/andicot/log-viewer). Nell’app Laravel eseguire:
 
 ```sh
-composer config repositories.andicot-log-viewer vcs https://github.com/Andicot/log-viewer
 composer require andicot/log-viewer:^13.0
 ```
 
@@ -31,8 +30,6 @@ Pubblicare la configurazione solo se non è già presente:
 ```sh
 php artisan log-viewer:publish --tag=config
 ```
-
-Dopo la registrazione su Packagist sarà sufficiente `composer require andicot/log-viewer:^13.0`, senza il repository aggiuntivo.
 
 I provider vengono scoperti automaticamente. Configurazioni e viste già pubblicate continuano a funzionare; non utilizzare `--force` se si vogliono mantenere le proprie personalizzazioni.
 
