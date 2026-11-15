@@ -272,6 +272,21 @@
         .badge.label-env, .label.label-env {
             background-color: #6A1B9A;
         }
+        #entries th:last-child,
+        #entries > tbody > tr > td:last-child:not([colspan]) {
+            width: 1%;
+            white-space: nowrap;
+            overflow-wrap: normal;
+        }
+
+        #entries > tbody > tr > td:last-child:not([colspan]) .btn {
+            white-space: nowrap;
+        }
+
+        #entries > tbody > tr > td:last-child:not([colspan]) [data-copy-status] {
+            display: block;
+            white-space: normal;
+        }
     </style>
     <!--[if lt IE 9]>
     <script src="{{ route('log-viewer::assets', ['path' => 'vendor/67f965a823db689d52be.js', 'v' => \Arcanedev\LogViewer\LogViewer::VERSION]) }}"></script>

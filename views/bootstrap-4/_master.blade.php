@@ -214,6 +214,21 @@
         #entries {
             overflow-wrap: anywhere;
         }
+        #entries th:last-child,
+        #entries > tbody > tr > td:last-child:not([colspan]) {
+            width: 1%;
+            white-space: nowrap;
+            overflow-wrap: normal;
+        }
+
+        #entries > tbody > tr > td:last-child:not([colspan]) .btn {
+            white-space: nowrap;
+        }
+
+        #entries > tbody > tr > td:last-child:not([colspan]) [data-copy-status] {
+            display: block;
+            white-space: normal;
+        }
     </style>
 </head>
 <body>

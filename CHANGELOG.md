@@ -1,5 +1,9 @@
 # Changelog
 
+## 13.1.1 — 2026-11-15
+
+- Prevent long log messages from squeezing the Actions column and splitting button labels. Preserve wrapping of log messages and the existing responsive table in all three themes.
+
 ## 13.1.0 — 2026-11-15
 
 - Cache dashboard/list counters per file using content fingerprints, including same-size rewrite invalidation. Cache contains no log messages.
