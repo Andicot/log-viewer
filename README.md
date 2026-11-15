@@ -64,7 +64,7 @@ composer install
 composer test
 ```
 
-La CI configura PHP 8.3/8.4/8.5 e dipendenze minime/correnti. I test usano Testbench 11 e PHPUnit 12; le annotazioni della suite originale sono state convertite in attributi.
+Il [workflow CI](tools/ci/run-tests.yml) configura PHP 8.3/8.4/8.5 e dipendenze minime/correnti. Per attivarlo, spostarlo in `.github/workflows/run-tests.yml` usando credenziali GitHub con permesso `workflow`. I test usano Testbench 11 e PHPUnit 12; le annotazioni della suite originale sono state convertite in attributi.
 
 - [Installazione dettagliata e app di verifica](_docs/1.Installation-and-Setup.md)
 - [Configurazione originale](_docs/2.Configuration.md)
