@@ -12,8 +12,9 @@ jobs:
       fail-fast: false
       matrix:
         php: ['8.3', '8.4', '8.5']
+        laravel: ['12', '13']
         dependency-version: [prefer-lowest, prefer-stable]
-    name: PHP ${{ matrix.php }} - ${{ matrix.dependency-version }}
+    name: Laravel ${{ matrix.laravel }} - PHP ${{ matrix.php }} - ${{ matrix.dependency-version }}
     steps:
       - uses: actions/checkout@v4
       - uses: shivammathur/setup-php@v2
@@ -21,6 +22,9 @@ jobs:
           php-version: ${{ matrix.php }}
           extensions: mbstring, pdo_sqlite
           coverage: none
-      - run: composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction
+      - name: Resolve matching Laravel and Testbench versions
+        run: |
+          if [ "${{ matrix.laravel }}" = "12" ]; then testbench=10; else testbench=11; fi
+          composer update --with="laravel/framework:^${{ matrix.laravel }}.0" --with="orchestra/testbench-core:^$testbench.0" --${{ matrix.dependency-version }} --prefer-dist --no-interaction
       - run: composer validate --strict
       - run: vendor/bin/phpunit --fail-on-warning --fail-on-risky

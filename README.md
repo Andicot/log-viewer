@@ -1,8 +1,8 @@
-# LogViewer per Laravel 13
+# LogViewer per Laravel 12 e 13
 
 Fork di [ARCANEDEV/LogViewer](https://github.com/ARCANEDEV/LogViewer), basato sulla release `11.0.1` (`806498da9792eb34e39df9350a7379a9018eaf5d`). Nome Composer: `andicot/log-viewer`.
 
-Richiede PHP 8.3+ e Laravel 13. Mantiene l'interfaccia originale, i temi Bootstrap 3/4/5, i contatori cliccabili per livello nell'elenco, ricerca, stack trace, contesto, download e cancellazione.
+Richiede PHP 8.3+ e Laravel 12 o 13. Mantiene l'interfaccia originale, i temi Bootstrap 3/4/5, i contatori cliccabili per livello nell'elenco, ricerca, stack trace, contesto, download e cancellazione.
 
 È stato corretto anche il pulsante del menu mobile Bootstrap 5, senza variazioni grafiche.
 
@@ -80,7 +80,7 @@ composer test
 node --test tests/js/copy.test.cjs
 ```
 
-Il [workflow CI](.github/workflows/run-tests.yml) configura PHP 8.3/8.4/8.5 e dipendenze minime/correnti. Viene eseguito automaticamente su push e pull request. I test usano Testbench 11 e PHPUnit 12; le annotazioni della suite originale sono state convertite in attributi.
+Il [workflow CI](.github/workflows/run-tests.yml) configura Laravel 12/13, PHP 8.3/8.4/8.5 e dipendenze minime/correnti. Viene eseguito automaticamente su push e pull request. I test usano Testbench 10 con Laravel 12 e Testbench 11 con Laravel 13, insieme a PHPUnit 12; le annotazioni della suite originale sono state convertite in attributi.
 
 - [Installazione dettagliata e app di verifica](_docs/1.Installation-and-Setup.md)
 - [Configurazione originale](_docs/2.Configuration.md)

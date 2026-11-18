@@ -1,5 +1,11 @@
 # Changelog
 
+## 13.1.2 — 2026-11-18
+
+- Add Laravel 12 compatibility while preserving Laravel 13 support and PHP 8.3+.
+- Test both framework versions in CI with their matching Testbench major.
+- Verified locally on PHP 8.4: 200 tests and 8246 assertions pass on Laravel 12 and Laravel 13; all 3 JavaScript tests pass.
+
 ## 13.1.1 — 2026-11-15
 
 - Prevent long log messages from squeezing the Actions column and splitting button labels. Preserve wrapping of log messages and the existing responsive table in all three themes.
